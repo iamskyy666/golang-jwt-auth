@@ -35,6 +35,6 @@ func CreateToken(jwtSecret string, userID string, role string)(string,error){
 		return "", fmt.Errorf("⚠️ Token signing failed: %w",err)
 	}
 
-	// if all pk, then..
+	// if all ok, then..
 	return signed,nil	
 }
