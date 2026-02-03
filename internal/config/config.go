@@ -10,7 +10,7 @@ import (
 
 type Config struct {
 	MongoURI   string
-	MongDBName string
+	MongoDBName string
 	JWTSecret  string
 }
 
@@ -19,7 +19,7 @@ func Load() (Config, error) {
 	
 	cfg:=Config{
 		MongoURI: strings.TrimSpace(os.Getenv("MONGO_URI")),
-		MongDBName: strings.TrimSpace(os.Getenv("MONGODB_NAME")),
+		MongoDBName: strings.TrimSpace(os.Getenv("MONGODB_NAME")),
 		JWTSecret: strings.TrimSpace(os.Getenv("JWT_SECRET")),
 	}
 
@@ -28,7 +28,7 @@ func Load() (Config, error) {
 		return Config{},fmt.Errorf("⚠️ Missing MONGO-URI!")
 	}
 
-	if cfg.MongDBName == ""{
+	if cfg.MongoDBName == ""{
 		return Config{},fmt.Errorf("⚠️ Missing MONGODB-NAME!")
 	}
 
