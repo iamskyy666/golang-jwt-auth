@@ -1,0 +1,62 @@
+# =========================
+# Go build outputs
+# =========================
+bin/
+dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# =========================
+# Go workspace & modules
+# =========================
+go.work
+go.work.sum
+
+# Vendor (ignore if not committing vendor/)
+vendor/
+
+# =========================
+# Coverage & profiling
+# =========================
+coverage.out
+coverage.html
+*.cov
+*.prof
+*.pprof
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# IDEs & Editors
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
