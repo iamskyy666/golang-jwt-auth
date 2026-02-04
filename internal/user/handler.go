@@ -23,7 +23,7 @@ func (h *Handler) RegisterUser(ctx *gin.Context) {
 			"status_code":http.StatusBadRequest,
 		})
 	}
-	
+
 	output,err:= h.svc.Register(ctx.Request.Context(),input)
 	if err !=nil{
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -35,5 +35,6 @@ func (h *Handler) RegisterUser(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusCreated, output)
 }
+
 
 // 07:
