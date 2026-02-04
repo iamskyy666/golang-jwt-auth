@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -37,4 +38,37 @@ func CreateToken(jwtSecret string, userID string, role string)(string,error){
 
 	// if all ok, then..
 	return signed,nil	
+}
+
+// for RBA..
+func ParseToken(jwtSecret string, tokenStr string)(Claims, error){
+	var claims Claims
+
+	parsed,err:=jwt.ParseWithClaims(tokenStr, &claims,
+	func(t *jwt.Token) (any, error) {
+		// verify the algo.
+		if t.Method.Alg() != jwt.SigningMethodHS256.Alg(){
+			return nil,fmt.Errorf(" ⚠️ Unexpected signing-method: %v",t.Header["alg"])
+		}
+		return []byte(jwtSecret),nil
+	},
+	jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}),
+
+	)
+
+	// Checks
+	if err!=nil{
+		return Claims{},fmt.Errorf(" ⚠️ Token-parsing failed: %w",err)
+	}
+
+	if !parsed.Valid{
+		return Claims{},errors.New(" ⚠️ Invalid token!")
+	}
+
+	if claims.Subject==""{
+		return Claims{},errors.New(" ⚠️ Token missing subject!")
+	}
+	
+	// if all ok, then.. ✅
+	return claims,nil
 }
