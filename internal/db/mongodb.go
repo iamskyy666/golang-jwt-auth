@@ -35,5 +35,4 @@ func ConnectDB(ctx context.Context, cfg config.Config)(*Mongo, error){
 		Client: client,
 		DB: database,
 	}, nil
-
 }

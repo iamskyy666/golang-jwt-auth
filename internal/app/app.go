@@ -52,6 +52,5 @@ func (a *App) CloseMongo(ctx context.Context)error{
 	if err:=a.MongoClient.Disconnect(closeCtx); err!=nil{
 		return fmt.Errorf("⚠️ Failed to disconnect mongo: %w",err)
 	}
-
 	return nil
 }

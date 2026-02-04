@@ -54,7 +54,7 @@ func (s *Service) Register(ctx context.Context, input RegisterInput)(AuthResult,
 		return  AuthResult{}, errors.New("Email is already registerd.. Try with another one! ⚠️")
 	}
 
-	if !errors.Is(err,mongo.ErrNilDocument){
+	if !errors.Is(err,mongo.ErrNoDocuments){
 		return AuthResult{},err
 	}
 

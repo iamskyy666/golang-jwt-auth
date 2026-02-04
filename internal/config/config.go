@@ -18,7 +18,7 @@ func Load() (Config, error) {
 	_ = godotenv.Load()
 	
 	cfg:=Config{
-		MongoURI: strings.TrimSpace(os.Getenv("MONGO_URI")),
+		MongoURI: strings.TrimSpace(os.Getenv("MONGODB_URI")),
 		MongoDBName: strings.TrimSpace(os.Getenv("MONGODB_NAME")),
 		JWTSecret: strings.TrimSpace(os.Getenv("JWT_SECRET")),
 	}
@@ -36,6 +36,6 @@ func Load() (Config, error) {
 		return Config{},fmt.Errorf("⚠️ Missing JWT-SECRET!")
 	}
 
-	return Config{},nil
+	return cfg,nil
 
 }

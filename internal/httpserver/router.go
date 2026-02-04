@@ -1,8 +1,12 @@
 package httpserver
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/callmeskyy111/golang-jwt-auth/internal/app"
+	"github.com/callmeskyy111/golang-jwt-auth/internal/user"
+	"github.com/gin-gonic/gin"
+)
 
-func NewRouter() *gin.Engine{
+func NewRouter(a *app.App) *gin.Engine{
 
 	// health-check 
 	r:=gin.New()
@@ -10,6 +14,12 @@ func NewRouter() *gin.Engine{
 	r.Use(gin.Recovery())
 	r.GET("/health",HealthCheck)
 
-	return r
+	userRepo:= user.NewRepo(a.DB)
+	userSvc:=user.NewService(userRepo, a.Config.JWTSecret)
+	userHandler:=user.NewHandler(userSvc)
 
+	r.POST("/register",userHandler.RegisterUser)
+
+	return r
 }
+
