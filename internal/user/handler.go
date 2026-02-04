@@ -22,6 +22,7 @@ func (h *Handler) RegisterUser(ctx *gin.Context) {
 			"error":"⚠️ Invalid JSON body!",
 			"status_code":http.StatusBadRequest,
 		})
+		return
 	}
 
 	output,err:= h.svc.Register(ctx.Request.Context(),input)
@@ -37,4 +38,27 @@ func (h *Handler) RegisterUser(ctx *gin.Context) {
 }
 
 
-// 07:
+func (h *Handler) LoginUser(ctx *gin.Context){
+	var input LoginInput
+
+	if err:=ctx.ShouldBindJSON(&input); err!=nil{
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error":"⚠️ Invalid JSON body!",
+			"status_code":http.StatusBadRequest,
+		})
+		return
+	}
+
+	output,err:= h.svc.Login(ctx.Request.Context(),input)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error":err.Error(),
+			"status_code":http.StatusBadRequest,
+		})
+		return
+	}
+	ctx.JSON(http.StatusOK,output)
+}
+
+// 07:41:25
