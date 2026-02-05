@@ -45,5 +45,3 @@ func main() {
 		log.Fatalf("⚠️ Server Error: %v",err)
 	}
 }
-
-// 08:13:00
