@@ -19,7 +19,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("⚠️ App-Startup failed: %v",err)
 	}
-
 	defer func(){
 		if err:=a.CloseMongo(ctx); err!=nil{
 			log.Printf("⚠️ ShutDown warning: %v",err)
@@ -45,5 +44,6 @@ func main() {
 		}
 		log.Fatalf("⚠️ Server Error: %v",err)
 	}
-
 }
+
+// 08:13:00
